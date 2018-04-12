@@ -1,0 +1,30 @@
+// ******
+// Scrolls
+// ******
+
+// Add scroll to element, also fix smooth scroll for mobiles
+= scroll
+  overflow-y: auto
+  -webkit-overflow-scrolling: touch
+
+// Stylish scrollbar
+= scrollbar($scroll-track: (shadow: inset 0 0 6px rgba(0, 0, 0, 0.3), bg: grey, brad: 10px), $scroll-thumb: (shadow: inset 0 0 6px rgba(0, 0, 0, 0.3), bg: yellow, brad: 10px), $scrollbar: (width: 8px)
+  &::-webkit-scrollbar
+    @if map-has-key($scrollbar, width)
+      width: map-get($scrollbar, width)
+  // Scroll bar track
+  &::-webkit-scrollbar-track
+    @if map-has-key($scroll-track, shadow)
+      box-shadow: map-get($scroll-track, shadow)
+    @if map-has-key($scroll-track, bg)
+      background: map-get($scroll-track, bg)
+    @if map-has-key($scroll-track, brad)
+      border-radius: map-get($scroll-track, brad)
+  // Scroll bar thumb
+  &::-webkit-scrollbar-thumb
+    @if map-has-key($scroll-thumb, shadow)
+      box-shadow: map-get($scroll-thumb, bg)
+    @if map-has-key($scroll-thumb, bg)
+      background: map-get($scroll-thumb, shadow)
+    @if map-has-key($scroll-thumb, brad)
+      border-radius: map-get($scroll-thumb, brad)

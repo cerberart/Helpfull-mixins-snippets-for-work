@@ -1,0 +1,64 @@
+// *****
+// Form elements
+// *****
+
+// Stylish placeholder
+= placeholder
+  &:-moz-placeholder
+    @content
+  &::-moz-placeholder
+    @content
+  &:-ms-input-placeholder
+    @content
+  &::-webkit-input-placeholder
+    @content
+
+// Stylish checkbox
+// set it for parent element of label and checkbox input, make sure checkbox tag is upper in DOM than label tag
+// $check can get several names: circle, check, square
+= checkbox($size: 20px, $colours: (border: grey, checkColour: crimson, bg: lighgrey), $check: check)
+  $gap: 2px
+  $padding: 5px
+  input[type='checkbox']
+    opacity: 0
+    visibility: hidden
+    position: absolute
+    &:checked + label:before
+      transform: scale(1)
+  label
+    display: block
+    position: relative
+    padding-left: $padding + $size + $gap
+    @if map-has-key($colours, checkColour)
+      color: map-get($colours, checkColour)
+    &:after
+      +content
+      left: 0
+      top: 0
+      width: $size
+      height: $size
+      border: 1px solid map-get($colours, border)
+      border-radius: 5px
+      @if $check == circle
+        border-radius: 50%
+      @if map-has-key($colours, checkColour)
+        color: map-get($colours, checkColour)
+      @if map-has-key($colours, bg)
+        background-color: map-get($colours, bg)
+    &:before
+      +content
+      top: $gap*2
+      left: $gap*2
+      width: $size - ($gap*3)
+      height: $size - ($gap*3)
+      background: currentcolor
+      transition: transform .3s ease-out
+      transform: scale(0)
+      border-radius: 3px
+      @if $check == circle
+        border-radius: 50%
+      @if $check == check
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0yMSA2LjI4NWwtMTEuMTYgMTIuNzMzLTYuODQtNi4wMTggMS4zMTktMS40OSA1LjM0MSA0LjY4NiA5Ljg2NS0xMS4xOTYgMS40NzUgMS4yODV6Ii8+PC9zdmc+)
+        background-repeat: no-repeat
+        background-size: contain
+        background-position: center

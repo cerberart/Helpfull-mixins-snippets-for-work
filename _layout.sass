@@ -1,0 +1,152 @@
+// ******
+// Page layout/grid mixins
+// ******
+
+// Check for touch devices, can be used for disabling hover/animations
+= media_touch $content
+  @media (pointer:coarse)
+    $content
+
+// Responsive square used for creating scalable elements
+= responsive_square_card
+  &:before
+    content: ''
+    padding-top: 100%
+    float: left
+  &:after
+    content: ''
+    display: block
+    clear: both
+
+// Responsive ratio
+// Used for creating scalable elements that maintain the same ratio
+= responsive-ratio($x,$y, $pseudo: false)
+  $padding: unquote( ( $y / $x ) * 100 + '%' )
+  @if $pseudo
+    &:before
+      +content
+      width: 100%
+      padding-top: $padding
+  @else
+    padding-top: $padding
+
+// Masonry like grid using css columns
+= masonry_parent($columns: 3, $gap: 0)
+  columns: $columns
+  column-gap: $gap
+  -moz-column-fill: balance
+  column-fill: balance
+  box-decoration-break: clone
+= masonry_child
+  backface-visibility: hidden
+  -webkit-column-break-inside: avoid // Chrome, Safari, Opera
+  page-break-inside: avoid // Firefox support for break-inside property
+  break-inside: avoid // IE 10+, Chrome
+
+// Responsive image
+= img_responsive
+  display: block
+  max-width: 100%
+  height: auto
+  margin: 0 auto
+
+// Position element centered with position: absolute
+= position_center
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+// Alignment for flex container
+= alignment($x, $y)
+  @if $y == top
+    $y: flex-start
+  @else if $y == center
+    $y: center
+  @else if $y == distributed
+    $y: space-between
+  @else if $y == stretch
+    $y: stretch
+  @else
+    $y: flex-end
+
+  @if $x == left
+    $x: flex-start
+  @else if $x == center
+    $x: center
+  @else if $x == distributed
+    $x: space-between
+  @else if $x == stretch
+    $x: stretch
+  @else
+    $x: flex-end
+
+  display: flex
+  justify-content: $y
+  align-items: $x
+
+// Z-indexes for class list
+$z-indexes: () !default
+@function z($name)
+  @if index($z-indexes, $name)
+    @return (length($z-indexes) - index($z-indexes, $name)) + 1
+  @else
+    @warn 'There is no item "#{$name}" in this list; choose one of: #{$z-indexes}'
+    @return null
+
+
+// Simple grid structure mixin
+= grid-row($gutter: $grid-gutter)
+  display: flex
+  flex-wrap: wrap
+  > *
+    flex-grow: 1
+    flex-basis: percentage(1 / $grid-columns)
+    box-sizing: border-box
+    padding-left: $gutter / 2
+    padding-right: $gutter / 2
+
+= grid-col($width: false)
+  @if $width
+    flex-grow: 0
+    flex-basis: percentage($width)
+
+= grid-shift($width: 0)
+  margin-left: percentage($width)
+
+.grid
+  +grid-row($grid-gutter)
+
+  @for $i from 1 through $grid-columns
+    .col-#{$i}
+      +grid-col($i / $grid-columns)
+    .shift-#{$i}
+      +grid-shift($i / $grid-columns)
+
+  @media only screen and (max-width: $breakpoint)
+    > *
+      +grid-col(1)
+      +grid-shift(0)
+
+    @for $i from 1 through $grid-columns
+      .col-#{$i}
+        +grid-col(1)
+
+      .shift-#{$i}
+        +grid-shift(0)
+
+// Create classes for text aligns
+// and flex children aligns using margins
+@for $i from 1 to length($directions)
+  .-text-#{nth($directions, $i)}
+    text-align: nth($directions, $i)
+  .-m-push-#{nth($directions, $i)}
+    @if nth($directions, $i) == left
+      margin-left: 0
+      margin-right: auto
+    @if nth($directions, $i) == right
+      margin-left: auto
+      margin-right: 0
+    @if nth($directions, $i) == center
+      margin-left: auto
+      margin-right: auto

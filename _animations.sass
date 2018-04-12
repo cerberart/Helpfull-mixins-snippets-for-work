@@ -1,0 +1,69 @@
+// FADE SLIDER
+= fade_slider($num: 1, $fade: 1, $visible: 2)
+  $a: 100 / (($fade + $visible) * $num)
+  @keyframes fade_slider
+    0%
+      opacity: 0
+    #{$a * $fade}%
+      opacity: 1
+    #{$a * ($fade + $visible)}%
+      opacity: 1
+    #{$a * ($fade + $visible + $fade)}%
+      opacity: 0
+    100%
+      opacity: 0
+
+  animation-name: fade_slider
+  animation-duration: (($fade + $visible) * $num) + s
+  animation-iteration-count: infinite
+
+  @for $i from 1 through $num
+    &:nth-child(#{$i})
+      animation-delay: (#{($fade + $visible) * ($i - 1)}) + s
+
+// Frame based animation using sprite
+= frame_animation($name: sprite-1, $frames: 10, $timing: 5s, $size: 500px, $image: null)
+  @keyframes animation_#{$name}
+    from
+      background-position-x: 0px
+    to
+      background-position-x: -$size // length of sprite
+
+  width: $size / $frames
+  background-image: url('#{$image}')
+  animation: animation_#{$name} $timing steps($frames) infinite
+
+// Acceleration
+= acceleration($backface: true, $style: preserve-3d, $change: transform)
+  @if $backface
+    backface-visibility: hidden
+  will-change: transform
+  trasnform-style: preserve-3d
+
+
+// Standart Animations
+@keyframes AnimatioOpacity
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+@keyframes AnimationFadeOut
+  0%
+    opacity: 1
+  5%
+    opacity: 0
+  100%
+    opacity: 0
+    display: none
+
+@keyframes AnimationFadeIn
+  0%
+    opacity: 0
+    display: none
+  1%
+    display: block
+  100%
+    display: block
+    opacity: 1
+// END Standart Animations

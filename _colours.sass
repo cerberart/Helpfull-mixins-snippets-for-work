@@ -1,0 +1,21 @@
+// ******
+// COLOURS mixin used for creating classes
+// for color and background properties
+// ******
+
+// Example
+// $blue: #005260
+// $gold: #e6b520
+// $green: #20b9ab
+// $black: #464646
+// $colours: $black $gold $blue $green
+// $classNames: black gold blue green
+// +create_colours($colours, $classNames)
+// END Example
+
+= create_colours($list, $names)
+  @for $i from 1 to length($list)
+    .-color-#{nth($names, $i+1)}
+      color: nth($list, $i+1)
+    .-bg-#{nth($names, $i+1)}
+      background-color: nth($list, $i+1)
