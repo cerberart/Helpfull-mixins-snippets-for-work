@@ -150,3 +150,21 @@ $z-indexes: () !default
     @if nth($directions, $i) == center
       margin-left: auto
       margin-right: auto
+
+
+// * Asset URL builder
+// * @param {String} $type - Asset type, matching folder name
+// * @param {String} $file - Asset file name, including extension
+// * @return {URL} - A rails `image-url()` function leading to the asset
+// *
+// * Example:
+// * background-image: asset('pack.jpg', 'backgrounds')
+// * Output: background-image: url("project/backgrounds/pack.jpg")
+// *
+= asset($file, $type)
+  @if $type
+    $type: $type + '/'
+  @else
+    $type: ''
+
+  @return image-url($asset-base-path + $type + $file)

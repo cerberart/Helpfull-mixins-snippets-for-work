@@ -62,3 +62,15 @@
   white-space: nowrap
   @if $overflow
     overflow: $overflow
+
+
+= translate_em($pixels, $context: $browser-context)
+
+  @if unitless($pixels)
+    $pixels: $pixels * 1px
+
+  @if unitless($context)
+    $context: $context * 1px
+
+  @return $pixels / $context * 1em
+
