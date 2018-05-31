@@ -1,4 +1,17 @@
 module AssetsHelper
+  # In case you need to get information of asset (image dimensions, size and etc.)
+  require 'fastimage'
+
+  def fast_image name, action
+    if action == "dimension"
+      return FastImage.size(asset_url(name))
+    elsif action == "size"
+      return FastImage.size(asset_url(name)).content_length
+    elsif action == "orientation"
+      return FastImage.size(asset_url(name)).orientation
+    else
+      return FastImage.type(asset_url(name))
+  end
 
   def icon_svg name, style={}
     style[:size] ||= '26x26'

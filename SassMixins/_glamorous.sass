@@ -2,8 +2,8 @@
 // Glamourous
 // *****
 
-// Dynamic box shadow gradient
-// Reference http://prntscr.com/j1mxnc
+// * Dynamic box shadow gradient
+// * Reference http://prntscr.com/j1mxnc
 = dynamic_shadow($gradient: (degree: 75deg, start: #6d78ff, end: #00ffb8), $shadow: (blur: 0.4rem, opacity: .7, y: .5rem))
   position: relative
   z-index: 1
@@ -18,7 +18,7 @@
     filter: blur(map-get($shadow, blur))
     opacity: map-get($shadow, opacity)
 
-// Underline border animation on hover
+// * Underline border animation on hover
 = animate_underline($color: #0087ca, $timing: .25s, $ease: $ease-in-out-quad, $borderHeight: 2px)
   display: inline-block
   position: relative
@@ -36,8 +36,8 @@
     transform: scaleX(1)
     transform-origin: bottom left
 
-// Show hint on hover
-// ATTENTION! Parent element need to have data-text attribute with text inside
+// * Show hint on hover
+// * ATTENTION! Parent element need to have data-text attribute with text inside
 = hint($direction: (x: left, y: top), $color: white, $bg: rgba(black, .8), $width: 150px, $gap: 10px)
   position: relative
   z-index: 1
@@ -60,8 +60,8 @@
       top: 50%
       transform: translate(-50%, -50%)
 
-// Custom separator with image (best use it with base64 image)
-// Reference http://prntscr.com/j1ni3m
+// * Custom separator with image (best use it with base64 image)
+// * Reference http://prntscr.com/j1ni3m
 = shape_separator($size: 40px, $direction: (x: left, y: top), $image: null)
   position: relative
   @if map-has-key($direction, x)
@@ -93,7 +93,7 @@
       @if map-gey($direction, y) == bottom
         top: 100%
 
-// Overlay can be used for modals
+// * Overlay can be used for modals
 = overlay($color: rgba(0,0,0,.5))
   position: absolute
   top: 0
@@ -112,17 +112,16 @@
 // * Haml Rails way:
 // * = link_to "docs/rules.pdf" do
 // *   %span Rules {file_size('docs/rules.pdf')}
-// *
 = pdf_warning
   a[href$=".pdf"][data-size]:after
     content: " (PDF, " attr(data-size) ")"
 
-/// Mixin to place items on a circle
-/// @author Hugo Giraudel
-/// @author Ana Tudor
-/// @param {Integer} $item-count - Number of items on the circle
-/// @param {Length} $circle-size - Large circle size
-/// @param {Length} $item-size - Single item size
+// * Mixin to place items on a circle
+// * @author Hugo Giraudel
+// * @author Ana Tudor
+// * @param {Integer} $item-count - Number of items on the circle
+// * @param {Length} $circle-size - Large circle size
+// * @param {Length} $item-size - Single item size
 = on-circle($item-count, $circle-size, $item-size)
   position: relative
   width:  $circle-size
