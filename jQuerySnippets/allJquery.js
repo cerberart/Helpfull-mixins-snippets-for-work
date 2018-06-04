@@ -61,3 +61,25 @@ $.fn.alterClass = function(removals, additions) {
   }
 };
 
+
+menuHighligthToViewport = function(){
+  var $sections = $('[data-scroll]');
+  $(window).scroll(function(){
+    var currentScroll = $(this).scrollTop();
+    var $currentSection;
+
+    $sections.each(function(){
+      var divPosition = $(this).offset().top;
+      if( divPosition - (window.outerHeight/3) < currentScroll ){
+        $currentSection = $(this);
+      } else {
+        $('.header-navigation__link').removeClass('-is-active');
+      }
+
+      var id = $currentSection.attr('id');
+      $('.header-navigation__link').removeClass('-is-active');
+      $("a[href='#"+id+"']").addClass('-is-active');
+
+    })
+  });
+}
