@@ -36,4 +36,13 @@ const helper_pluralize = (number, one, two, five) => {
   if (number >= 2 && number <= 4)
     return two
   return five
-};
+}
+
+/**
+ * Get Youtube video ID from the link
+ * @param  {String} link [ex: https://www.youtube.com/watch?v=FcQ9Tqu0040]
+ * @return {String}      [ex: FcQ9Tqu0040]
+ */
+const youtubeID = (link) => {
+  return link.substr(youtubeLink.lastIndexOf("v=") + 2, 11)
+}
