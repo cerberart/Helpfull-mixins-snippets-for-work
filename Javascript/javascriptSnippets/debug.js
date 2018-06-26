@@ -11,6 +11,17 @@ const cssPropertySupported = (prop, value) => {
 }
 
 /**
+ * [cssPropertySupported check browser for CSS property using Support method]
+ * @param  {String} prop  [CSS property name]
+ * @param  {String} value [CSS property value]
+ * @return {Boolean}
+ * EX: CSS.supports('mask-image','url()')
+ */
+const cssSupports = (prop, value) => {
+  return CSS.supports(prop, value)
+}
+
+/**
  * [log description]
  * @param  {Any} data   [required]
  * @param  {String} action [non required. used to identify how console should print]
