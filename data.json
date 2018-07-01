@@ -1,0 +1,82 @@
+{
+
+  "appartment": {
+
+    "heading": "1. Данные о вашем жилье",
+
+    "rooms": {
+      "title": "Количество комнат",
+      "type": "text_range",
+      "value": 2,
+      "name": "rooms"
+    },
+
+    "space": {
+      "title": "Площадь квартиры",
+      "inputs": [
+        {"title": "общая:", "name": "common_space", "type": "text", "value": 42.3},
+        {"title": "жилая:", "name": "living_space", "type": "text", "value": 33.5}
+      ]
+    },
+
+    "family_number": {
+      "title": "Число членов семьи",
+      "type": "text_range",
+      "value": 5,
+      "name": "family_number"
+    },
+
+    "house_type": {
+      "title": "Тип (материал) стен дома",
+      "name": "house_type",
+      "type": "select",
+      "options": [
+        {"title": "ячеистый бетон", "name": "beton"},
+        {"title": "газосиликат", "name": "gazosilicate"}
+      ]
+    },
+
+    "gas_cooker": {
+      "type": "checkbox",
+      "value": false,
+      "label": "газовая плита"
+    }
+  },
+
+  "resourses": {
+
+    "electricity": {
+      "value": 200,
+      "price": 0.1218
+    },
+
+    "heating": {
+      "value": 0.187,
+      "price": 56.70
+    },
+
+    "hot_water": {
+      "value": 0.5165,
+      "price": 16.9259
+    },
+
+    "cold_water": {
+      "value": 16.8,
+      "price": 0.8053
+    }
+  },
+
+  "equipment": {
+
+    "water": [
+      {"title": "Обычные краны", "name": "simple"},
+      {"title": "Экономные краны", "name": "economy"}
+    ],
+
+    "loo_system": false,
+
+
+
+  }
+
+}

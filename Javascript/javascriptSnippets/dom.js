@@ -39,3 +39,22 @@ const scrollTo = (to, duration) => {
 
   animateScroll();
 }
+
+
+/**
+ * [throttle for scroll function, from these guys:
+ * https://evilmartians.com/chronicles/scroll-to-the-future-modern-javascript-css-scrolling-implementations]
+ * @param  {String} action [name of the callback function]
+ * @return {[init function]}
+ */
+const throttle = (action)=> {
+  let isRunning = false
+  return ()=> {
+    if (isRunning) return
+    isRunning = true
+    window.requestAnimationFrame(() => {
+      action()
+      isRunning = false
+    })
+  }
+}
